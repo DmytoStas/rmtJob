@@ -113,14 +113,24 @@ body::-webkit-scrollbar {
 
 /* LOGO */
 .logo {
+  display: flex;
+  align-items: center;
+  height: 33px;
   margin-left: -8px;
   user-select: none;
+
+  color: rgb(255, 255, 255);
+  font-size: 17px;
+  letter-spacing: 0.5px;
 }
 
 .logo__icon {
   height: 33px;
-  width: 94px;
-  margin-bottom: -5px;
+  width: 33px;
+}
+
+.logo__accent {
+  font-weight: 800;
 }
 
 /* BOOKMARKS BTN */
@@ -148,4 +158,66 @@ body::-webkit-scrollbar {
   left: 0px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/* SEARCH */
+.search {
+  position: relative;
+  animation: intro 0.3s 0.1s backwards;
+  margin: 0 auto;
+  width: 610px;
+  margin-top: 20px;
+}
+
+.search > button {
+  cursor: pointer;
+  position: absolute;
+  top: 17px;
+  left: 25px;
+}
+
+.search > button > i {
+  transition: all 0.2s;
+  color: rgba(0, 0, 0, 0.73);
+}
+
+.search__icon:hover,
+.search__icon:focus {
+  color: rgba(0, 0, 0, 0.93);
+}
+
+.search input {
+  height: 56px;
+  width: 100%;
+  border-radius: 4px;
+  padding-left: 55px;
+  padding-right: 15px;
+  padding-bottom: 2px;
+  color: rgba(0, 0, 0, 0.9);
+  caret-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.2s, box-shadow 0.1s;
+}
+
+.search input::selection {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.search input:hover,
+.search input:focus {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.search input:focus {
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+
+.search input::placeholder {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.search__input--invalid {
+  box-shadow: 0 0 0 4px rgba(47, 19, 19, 0.729);
 }

@@ -9,7 +9,7 @@ export default function SearchForm() {
       />
 
       <button type="submit">
-        <i></i>
+        <i className="fa-solid fa-magnifying-glass"></i>
       </button>
     </form>
   );
