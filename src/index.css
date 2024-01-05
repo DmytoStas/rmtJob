@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
-@import-normalize;
+@import "/node_modules/modern-normalize/modern-normalize.css";
 
 /* RESET */
 *,
@@ -7,7 +7,6 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 ul,
@@ -23,12 +22,130 @@ a {
 button {
   font: inherit;
   border: initial;
-  outline: initial; /* create alternative for focus state */
+  outline: initial;
   background-color: initial;
 }
 
 input {
   border: initial;
-  outline: initial; /* create alternative for focus state */
+  outline: initial;
   font: inherit;
+}
+
+/* BASE */
+body {
+  background-color: #dee3e9;
+  color: rgb(22, 24, 28);
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  position: relative;
+
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* BACKGROUND */
+.background {
+  position: absolute;
+  height: 210px;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  overflow: hidden;
+  background-image: linear-gradient(125deg, #1f74f1 -10%, #0850b9 100%);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+.background::before {
+  content: "";
+  background-image: linear-gradient(
+    -180deg,
+    rgba(0, 0, 0, 0.025) 0,
+    rgba(0, 0, 0, 0.075) 99%
+  );
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+
+.background > svg {
+  position: absolute;
+  top: -25px;
+  left: 0;
+  z-index: -1;
+  user-select: none;
+
+  width: 100%;
+  min-width: 1440px;
+  height: 100%;
+
+  transform: scale(1.1);
+}
+
+/* HEADER */
+.header {
+  height: 148px;
+  margin-bottom: 13px;
+  position: relative;
+
+  margin-bottom: 0;
+}
+
+.header__top {
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+  padding: 0 12px;
+  margin: 0 auto;
+  padding-top: 12px;
+  position: relative;
+  justify-content: center;
+  padding-top: 40px;
+
+  animation: intro 0.3s;
+}
+
+/* LOGO */
+.logo {
+  margin-left: -8px;
+  user-select: none;
+}
+
+.logo__icon {
+  height: 33px;
+  width: 94px;
+  margin-bottom: -5px;
+}
+
+/* BOOKMARKS BTN */
+.bookmarks-btn {
+  text-transform: lowercase;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-left: 13px;
+  padding-left: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.bookmarks-btn::before {
+  content: "";
+  height: 15px;
+  width: 2px;
+  display: block;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.3);
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
 }
