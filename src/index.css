@@ -22,6 +22,7 @@ a {
 button {
   font: inherit;
   border: initial;
+
   outline: initial;
   background-color: initial;
 }
@@ -32,13 +33,19 @@ input {
   font: inherit;
 }
 
+/* UTILITIES */
+.u-bold {
+  font-weight: 700;
+}
+
 /* BASE */
 body {
-  background-color: #dee3e9;
-  color: rgb(22, 24, 28);
-  min-height: 100vh;
-  font-family: "Inter", sans-serif;
   position: relative;
+  min-height: 100vh;
+
+  font-family: "Inter", sans-serif;
+  color: rgb(22, 24, 28);
+  background-color: #dee3e9;
 
   scrollbar-width: none;
 }
@@ -47,14 +54,44 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+/* HEADINGS */
+.first-heading {
+  font-size: 31px;
+  font-weight: 400;
+  color: #fff;
+
+  font-size: 27px;
+  display: none;
+}
+
+.second-heading {
+  font-size: 23px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.third-heading {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.fourth-heading {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
 /* BACKGROUND */
 .background {
   position: absolute;
-  height: 210px;
-  width: 100%;
+  z-index: -2;
   top: 0;
   left: 0;
-  z-index: -2;
+
+  height: 210px;
+  width: 100%;
+
   overflow: hidden;
   background-image: linear-gradient(125deg, #1f74f1 -10%, #0850b9 100%);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
@@ -62,51 +99,52 @@ body::-webkit-scrollbar {
 
 .background::before {
   content: "";
-  background-image: linear-gradient(
-    -180deg,
-    rgba(0, 0, 0, 0.025) 0,
-    rgba(0, 0, 0, 0.075) 99%
-  );
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
+
+  background-image: linear-gradient(
+    -180deg,
+    rgba(0, 0, 0, 0.025) 0,
+    rgba(0, 0, 0, 0.075) 99%
+  );
 }
 
 .background > svg {
   position: absolute;
+  z-index: -1;
   top: -25px;
   left: 0;
-  z-index: -1;
   user-select: none;
 
   width: 100%;
   min-width: 1440px;
   height: 100%;
 
-  transform: scale(1.1);
+  transform: scale(1.5);
 }
 
 /* HEADER */
 .header {
-  height: 148px;
-  margin-bottom: 13px;
   position: relative;
 
+  height: 148px;
+  margin-bottom: 13px;
   margin-bottom: 0;
 }
 
 .header__top {
+  position: relative;
+
   display: flex;
-  align-items: center;
   max-width: 1000px;
   padding: 0 12px;
   margin: 0 auto;
-  padding-top: 12px;
-  position: relative;
-  justify-content: center;
   padding-top: 40px;
+  align-items: center;
+  justify-content: center;
 
   animation: intro 0.3s;
 }
@@ -114,8 +152,8 @@ body::-webkit-scrollbar {
 /* LOGO */
 .logo {
   display: flex;
-  align-items: center;
   height: 33px;
+  align-items: center;
   margin-left: -8px;
   user-select: none;
 
@@ -135,50 +173,181 @@ body::-webkit-scrollbar {
 
 /* BOOKMARKS BTN */
 .bookmarks-btn {
-  text-transform: lowercase;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.75);
+  position: relative;
+
+  display: flex;
+  height: 32px;
   margin-left: 13px;
   padding-left: 13px;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s;
-  height: 32px;
-  display: flex;
   align-items: center;
+
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  text-transform: lowercase;
+  cursor: pointer;
+
+  transition: all 0.2s;
 }
 
 .bookmarks-btn::before {
   content: "";
-  height: 15px;
-  width: 2px;
-  display: block;
   position: absolute;
-  background-color: rgba(255, 255, 255, 0.3);
   left: 0px;
   top: 50%;
+
+  display: block;
+  height: 15px;
+  width: 2px;
+  background-color: rgba(255, 255, 255, 0.3);
+
   transform: translateY(-50%);
+}
+
+/* JOB LIST */
+.job-list {
+  position: relative;
+  display: flex;
+  min-height: 140px;
+  flex: 1;
+  flex-direction: column;
+
+  background-color: #fff;
+  scrollbar-color: #cacdd0 #ffffff;
+  scrollbar-width: thin;
+}
+
+.job-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.job-list::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.job-list::-webkit-scrollbar-thumb {
+  background-color: #cacdd0;
+  transition: all 0.2s;
+}
+
+.job-list::-webkit-scrollbar-thumb:hover {
+  background-color: #b1b4b8;
+}
+
+.bookmarks-popover {
+  position: fixed;
+  left: 50%;
+  top: 82px;
+  z-index: 10;
+  width: 340px;
+  min-height: 76px;
+  min-width: 340px;
+
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.15);
+  transform: translateX(-50%);
+  transform-origin: left;
+  transition: all 0.2s;
+}
+
+/* JOB ITEM */
+.job-item {
+  height: 76px;
+  cursor: pointer;
+  background-color: #fff;
+  transition: background-color 0.2s;
+}
+
+.job-item:not(:nth-child(7)) {
+  border-bottom: 1px solid #ebeff1;
+}
+
+.job-item:hover {
+  background-color: #f4f5f7;
+}
+
+.job-item--active {
+  background-color: #f4f5f7;
+}
+
+.job-item__link {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 14px 20px;
+}
+
+.job-item__badge {
+  display: flex;
+  height: 46px;
+  width: 38px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 13px;
+
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 5px;
+  background-color: #dee3e9;
+}
+
+.job-item__middle {
+}
+
+.job-item__company {
+  font-size: 13px;
+  font-style: italic;
+}
+
+.job-item__right {
+  display: flex;
+  margin-left: auto;
+  flex-direction: column;
+  align-items: center;
+  transform: translateX(2px) translateY(0px);
+}
+
+.job-item__right svg {
+  font-size: 14px;
+
+  color: #d7dbe0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.job-item__right svg.filled {
+  color: #2671dd;
+}
+
+.job-item__time {
+  margin-top: 5px;
+
+  font-size: 11px;
+  color: #515459;
 }
 
 /* SEARCH */
 .search {
   position: relative;
-  animation: intro 0.3s 0.1s backwards;
-  margin: 0 auto;
   width: 610px;
+  margin: 0 auto;
   margin-top: 20px;
+
+  animation: intro 0.3s 0.1s backwards;
 }
 
 .search > button {
-  cursor: pointer;
   position: absolute;
   top: 17px;
   left: 25px;
+
+  cursor: pointer;
 }
 
 .search > button > i {
-  transition: all 0.2s;
   color: rgba(0, 0, 0, 0.73);
+  transition: all 0.2s;
 }
 
 .search__icon:hover,
@@ -189,13 +358,14 @@ body::-webkit-scrollbar {
 .search input {
   height: 56px;
   width: 100%;
-  border-radius: 4px;
   padding-left: 55px;
   padding-right: 15px;
   padding-bottom: 2px;
+
   color: rgba(0, 0, 0, 0.9);
   caret-color: rgba(0, 0, 0, 0.5);
   background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 4px;
   transition: all 0.2s, box-shadow 0.1s;
 }
 
@@ -220,4 +390,81 @@ body::-webkit-scrollbar {
 
 .search__input--invalid {
   box-shadow: 0 0 0 4px rgba(47, 19, 19, 0.729);
+}
+
+/* CONTAINER */
+.container {
+  display: flex;
+  height: 616px;
+  width: 976px;
+  margin: 0 12px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.07);
+  animation: intro 0.3s 0.2s backwards;
+}
+
+/* SIDEBAR */
+.sidebar {
+  display: flex;
+  width: 340px;
+  flex-direction: column;
+}
+
+.sidebar__top {
+  display: flex;
+  padding: 10px 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 1px solid #e8edf0;
+}
+
+/* COUNT */
+.count {
+  font-size: 12px;
+}
+
+/* SORTING */
+.sorting,
+.sorting__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sorting > i {
+  margin-right: 5px;
+
+  font-size: 11px;
+  color: #4c4f50;
+}
+
+.sorting__button {
+  padding: 6px 8px;
+  margin-left: 2px;
+
+  font-size: 10px;
+  text-transform: uppercase;
+
+  background-color: #e8edf0;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sorting__button:hover,
+.sorting__button:focus {
+  background-color: #d0d5d8;
+}
+
+.sorting__button--active,
+.sorting__button--active:hover,
+.sorting__button--active:focus {
+  color: #fff;
+  background-color: #3c4041;
 }

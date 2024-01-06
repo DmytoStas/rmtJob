@@ -1,20 +1,5 @@
-import {
-  JobList,
-  PaginationControls,
-  ResultCount,
-  SortingControls,
-} from "@/components";
+import { type TChildren } from "@/lib/type";
 
-export default function Sidebar() {
-  return (
-    <div className="sidebar">
-      <div>
-        <ResultCount />
-        <SortingControls />
-      </div>
-
-      <JobList />
-      <PaginationControls />
-    </div>
-  );
+export default function Sidebar({ children }: TChildren) {
+  return <div className="sidebar">{children}</div>;
 }
