@@ -18,3 +18,4 @@ export { default as JobListItem } from "./JobListItem";
 export { default as BookmarkIcon } from "./BookmarkIcon";
 export { default as HeaderTop } from "./HeaderTop";
 export { default as SidebarTop } from "./SidebarTop";
+export { default as Spinner } from "./Spinner";

@@ -1,4 +1,4 @@
-import { type TChildren } from "@/lib/type";
+import { type TChildren } from "@/lib/types";
 
 export default function Sidebar({ children }: TChildren) {
   return <div className="sidebar">{children}</div>;

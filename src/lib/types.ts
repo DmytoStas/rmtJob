@@ -11,3 +11,14 @@ export type JobItem = {
 export type TChildren = {
   children: React.ReactNode;
 };
+
+export type ExtendedJobItem = JobItem & {
+  description: string;
+  qualifications: string[];
+  reviews: string[];
+  duration: string;
+  location: string;
+  salary: string;
+  coverImgURL: string;
+  companyURL: string;
+};
