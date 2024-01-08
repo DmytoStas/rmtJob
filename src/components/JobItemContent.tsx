@@ -3,7 +3,7 @@ import { useActiveId, useExtendedJobItem } from "@/lib/hooks";
 
 export default function JobItemContent() {
   const activeId = useActiveId();
-  const [jobItem, isLoading] = useExtendedJobItem(activeId);
+  const { extendedJobItem: jobItem, isLoading } = useExtendedJobItem(activeId);
 
   if (isLoading) {
     return (
@@ -94,7 +94,9 @@ export default function JobItemContent() {
 
             <ul className="qualifications__list">
               {qualifications.map((qualification) => (
-                <li className="qualifications__item">{qualification}</li>
+                <li key={qualification} className="qualifications__item">
+                  {qualification}
+                </li>
               ))}
             </ul>
           </section>
@@ -109,7 +111,9 @@ export default function JobItemContent() {
 
             <ul className="reviews__list">
               {reviews.map((review) => (
-                <li className="reviews__item">{review}</li>
+                <li key={review} className="reviews__item">
+                  {review}
+                </li>
               ))}
             </ul>
           </section>

@@ -18,11 +18,17 @@ import {
   SortingControls,
   SidebarTop,
 } from "@/components";
-import { useJobItems } from "@/lib/hooks";
+import { useDebounce, useJobItems } from "@/lib/hooks";
 
 function App() {
   const [searchText, setSearchText] = useState("");
-  const [jobItems, isLoading] = useJobItems(searchText);
+  const debouncedSearchText = useDebounce(searchText, 250);
+
+  const {
+    jobItemsSliced: jobItems,
+    isLoading,
+    totalResults,
+  } = useJobItems(debouncedSearchText);
 
   return (
     <>
@@ -45,7 +51,7 @@ function App() {
       <Container>
         <Sidebar>
           <SidebarTop>
-            <ResultCount />
+            <ResultCount totalResults={totalResults} />
             <SortingControls />
           </SidebarTop>
 
