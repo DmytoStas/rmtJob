@@ -3,7 +3,7 @@ import { useActiveId, useExtendedJobItem } from "@/lib/hooks";
 
 export default function JobItemContent() {
   const activeId = useActiveId();
-  const { extendedJobItem: jobItem, isLoading } = useExtendedJobItem(activeId);
+  const { jobItem, isLoading } = useExtendedJobItem(activeId);
 
   if (isLoading) {
     return (

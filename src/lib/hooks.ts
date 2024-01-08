@@ -1,6 +1,44 @@
 import { useEffect, useState } from "react";
-import { BASE_API_URL } from "./constants";
+
+import { useQuery } from "@tanstack/react-query";
+
 import { type ExtendedJobItem, type JobItem } from "./types";
+import { BASE_API_URL } from "./constants";
+import { handleError } from "./utils";
+
+type ExtendedJobItemAPIResponce = {
+  public: boolean;
+  jobItem: ExtendedJobItem;
+};
+
+const fetchExtendedJobItem = async (
+  id: number
+): Promise<ExtendedJobItemAPIResponce> => {
+  const res = await fetch(`${BASE_API_URL}/${id}`);
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.description);
+  }
+
+  return await res.json();
+};
+
+export function useExtendedJobItem(id: number | null) {
+  const { data, isInitialLoading } = useQuery(
+    ["job-item", id],
+    () => (id ? fetchExtendedJobItem(id) : null),
+    {
+      staleTime: 1000 * 60 * 60,
+      refetchOnWindowFocus: false,
+      retry: false,
+      enabled: Boolean(id),
+      onError: handleError,
+    }
+  );
+
+  return { jobItem: data?.jobItem, isLoading: isInitialLoading } as const;
+}
 
 export function useActiveId() {
   const [activeId, setActiveId] = useState<number | null>(null);
@@ -22,52 +60,39 @@ export function useActiveId() {
   return activeId;
 }
 
+type JobItemsAPIResponce = {
+  public: boolean;
+  sorted: boolean;
+  jobItems: JobItem[];
+};
+
+const fetchJobItems = async (
+  searchText: string
+): Promise<JobItemsAPIResponce> => {
+  const res = await fetch(`${BASE_API_URL}?search=${searchText}`);
+
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.description);
+  }
+
+  return await res.json();
+};
+
 export function useJobItems(searchText: string) {
-  const [jobItems, setJobItems] = useState<JobItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data, isInitialLoading } = useQuery(
+    ["job-item", searchText],
+    () => fetchJobItems(searchText),
+    {
+      staleTime: 1000 * 60 * 60,
+      refetchOnWindowFocus: false,
+      retry: false,
+      enabled: Boolean(searchText),
+      onError: handleError,
+    }
+  );
 
-  const totalResults = jobItems.length;
-  const jobItemsSliced = jobItems.slice(0, 7);
-
-  useEffect(() => {
-    if (!searchText) return;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      const res = await fetch(`${BASE_API_URL}?search=${searchText}`);
-
-      const data = await res.json();
-      setIsLoading(false);
-      setJobItems(data.jobItems);
-    };
-
-    fetchData();
-  }, [searchText]);
-
-  return { jobItemsSliced, isLoading, totalResults } as const;
-}
-
-export function useExtendedJobItem(id: number | null) {
-  const [extendedJobItem, setExtendedJobItem] =
-    useState<ExtendedJobItem | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (!id) return;
-
-    const fetchData = async () => {
-      setIsLoading(true);
-      const res = await fetch(`${BASE_API_URL}/${id}`);
-
-      const data = await res.json();
-      setIsLoading(false);
-      setExtendedJobItem(data.jobItem);
-    };
-
-    fetchData();
-  }, [id]);
-
-  return { extendedJobItem, isLoading } as const;
+  return { jobItems: data?.jobItems, isLoading: isInitialLoading } as const;
 }
 
 export function useDebounce<T>(value: T, delay = 500): T {
