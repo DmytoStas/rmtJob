@@ -22,3 +22,7 @@ export type ExtendedJobItem = JobItem & {
   coverImgURL: string;
   companyURL: string;
 };
+
+export type PageDirection = "next" | "previos";
+
+export type SortBy = "relevant" | "recent";
