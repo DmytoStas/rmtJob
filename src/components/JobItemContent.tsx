@@ -20,6 +20,7 @@ export default function JobItemContent() {
   }
 
   const {
+    id,
     title,
     company,
     description,
@@ -49,7 +50,7 @@ export default function JobItemContent() {
             <div className="job-info__below-badge">
               <time className="job-info__time">{daysAgo}d</time>
 
-              <BookmarkIcon />
+              <BookmarkIcon id={id} />
             </div>
           </div>
 
