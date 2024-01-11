@@ -480,6 +480,64 @@ body::-webkit-scrollbar {
   background-color: #3c4041;
 }
 
+/* PAGINATION */
+.pagination {
+  height: 40px;
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px 1px;
+  border-top: 1px solid #e8edf0;
+}
+
+.pagination__button {
+  font-size: 10px;
+  padding: 4px 10px;
+  border-radius: 500px;
+  color: #747c82;
+  background-color: #eceff2;
+  cursor: pointer;
+  transition: all 0.2s, visibility 0s;
+  gap: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.pagination__button svg {
+  width: 10px;
+  transform: translateY(1px);
+}
+
+.pagination__button:hover,
+.pagination__button:focus {
+  background-color: #dde2e6;
+}
+
+.pagination__button--hidden {
+  visibility: hidden;
+}
+
+.pagination__button--next {
+  margin-left: auto;
+}
+
+.pagination__button--back .pagination__icon {
+  margin-right: 3px;
+}
+
+.pagination__button--next .pagination__icon {
+  margin-left: 3px;
+}
+
+.pagination__button > span {
+  font-weight: 500;
+}
+.pagination__icon {
+  font-size: 8px;
+  color: #9fa6b0;
+}
+
 /* JOB DETAILS */
 .job-details {
   flex: 1;

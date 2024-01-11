@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 
 import { type ExtendedJobItem, type JobItem } from "./types";
 import { BASE_API_URL } from "./constants";
 import { handleError } from "./utils";
-import { BookmarkContext } from "@/components/BookmarksContextProvider";
+import { BookmarkContext } from "@/contexts/BookmarksContextProvider";
 
 type ExtendedJobItemAPIResponce = {
   public: boolean;
@@ -39,6 +39,27 @@ export function useExtendedJobItem(id: number | null) {
   );
 
   return { jobItem: data?.jobItem, isLoading: isInitialLoading } as const;
+}
+
+export function useJobItems(ids: number[]) {
+  const results = useQueries({
+    queries: ids.map((id) => ({
+      queryKey: ["job-item", id],
+      queryFn: () => fetchExtendedJobItem(id),
+      staleTime: 1000 * 60 * 60,
+      refetchOnWindowFocus: false,
+      retry: false,
+      enabled: Boolean(id),
+      onError: handleError,
+    })),
+  });
+
+  const jobItems = results
+    .map((result) => result.data?.jobItem)
+    .filter((jobItem) => jobItem !== undefined) as ExtendedJobItem[];
+  const isLoading = results.some((result) => result.isLoading);
+
+  return { jobItems, isLoading };
 }
 
 export function useActiveId() {
@@ -80,7 +101,7 @@ const fetchJobItems = async (
   return await res.json();
 };
 
-export function useJobItems(searchText: string) {
+export function useSearchQuery(searchText: string) {
   const { data, isInitialLoading } = useQuery(
     ["job-item", searchText],
     () => fetchJobItems(searchText),
@@ -134,4 +155,25 @@ export function useBookmarkContext() {
   }
 
   return context;
+}
+
+export function useOnClickOutside(
+  refs: React.RefObject<HTMLElement>[],
+  handler: () => void
+) {
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (
+        e.target instanceof HTMLElement &&
+        refs.every((ref) => !ref.current?.contains(e.target as Node))
+      ) {
+        handler();
+      }
+    };
+
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.addEventListener("click", handleClick);
+    };
+  }, [refs, handler]);
 }

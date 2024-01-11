@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "@/components/App.tsx";
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import BookmarksContextProvider from "./components/BookmarksContextProvider";
+import BookmarksContextProvider from "./contexts/BookmarksContextProvider";
 
 const queryClient = new QueryClient();
 
